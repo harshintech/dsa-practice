@@ -1,0 +1,223 @@
+# LeetCode 1004 - Max Consecutive Ones III
+
+---
+
+## 📌 Problem
+
+Given a binary array `nums` and an integer `k`,  
+return the maximum number of consecutive `1`s in the array  
+if you can flip at most `k` zeros.
+
+---
+
+## 🧩 Example
+
+Input:
+```
+nums = [1,1,1,0,0,0,1,1,1,1,0]
+k = 2
+```
+
+Output:
+```
+6
+```
+
+Explanation:
+Flip two zeros → longest subarray with at most 2 zeros has length 6.
+
+---
+
+# 🚀 Approach (Sliding Window)
+
+## 🔑 Key Idea
+
+We want the **longest subarray with at most `k` zeros**.
+
+So:
+
+- Expand window with `end`
+- Count zeros
+- If zero count > k → shrink window from `start`
+- Track maximum window size
+
+---
+
+# 💡 Algorithm Steps
+
+1. Initialize:
+   - `start = 0`
+   - `zeroCount = 0`
+   - `maxLen = 0`
+2. Traverse using `end`
+3. If `nums[end] == 0`, increase `zeroCount`
+4. While `zeroCount > k`:
+   - If `nums[start] == 0`, decrease `zeroCount`
+   - Move `start`
+5. Update `maxLen`
+
+---
+
+# 💻 Java Code
+
+```java
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        
+        int start = 0;
+        int maxLen = 0;
+        int zeroCount = 0;
+
+        for(int end = 0; end < nums.length; end++){
+
+            if(nums[end] == 0){
+                zeroCount++;
+            }
+
+            while(zeroCount > k){
+                if(nums[start] == 0){
+                    zeroCount--; 
+                }
+                start++;
+            }
+
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+
+        return maxLen;
+    }
+}
+```
+
+---
+
+# 🎨 Graphical Representation
+
+Example:
+
+```
+nums = [1,1,1,0,0,0,1,1,1,1,0]
+k = 2
+```
+
+---
+
+### Step 1
+
+Window:
+```
+[1,1,1]
+zeroCount = 0
+```
+
+---
+
+### Step 2
+
+Add first zero:
+```
+[1,1,1,0]
+zeroCount = 1
+```
+
+---
+
+### Step 3
+
+Add second zero:
+```
+[1,1,1,0,0]
+zeroCount = 2
+```
+
+Still valid (≤ k)
+
+---
+
+### Step 4
+
+Add third zero:
+```
+[1,1,1,0,0,0]
+zeroCount = 3 ❌
+```
+
+Now shrink window until zeroCount ≤ k
+
+After shrinking:
+```
+[0,0,1,1,1,1]
+zeroCount = 2
+```
+
+---
+
+### Maximum Window Found
+
+```
+[0,1,1,1,1,0]  → length = 6
+```
+
+---
+
+# 🎉 Final Answer
+
+Maximum consecutive 1s (with at most k flips):
+
+```
+6
+```
+
+---
+
+# ⏱ Time Complexity
+
+O(n)
+
+- Each element visited at most twice.
+
+---
+
+# 📦 Space Complexity
+
+O(1)
+
+- Only variables used.
+
+---
+
+# 🧠 Why This Works
+
+We maintain a valid window:
+
+- At most `k` zeros
+- Expand greedily
+- Shrink only when invalid
+
+This guarantees maximum length.
+
+---
+
+# 🔥 Pattern Used
+
+Sliding Window  
+Two Pointers  
+At Most K Condition  
+
+---
+
+# ✅ Final Output
+
+Input:
+```
+nums = [1,1,1,0,0,0,1,1,1,1,0]
+k = 2
+```
+
+Output:
+```
+6
+```
+
+
+
