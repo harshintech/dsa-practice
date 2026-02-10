@@ -236,5 +236,4 @@ Output:
 ```
 3
 ```
-![itachiuchiha.png](https://assets.leetcode.com/users/images/99ea11f3-858f-4804-b622-da2f1722941a_1770748431.1022782.png)
 
