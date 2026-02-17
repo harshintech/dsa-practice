@@ -1,6 +1,9 @@
-# 🎒 0/1 Knapsack (1D DP Optimization)
+# 🎒 0/1 Knapsack (2D and 1D DP Optimization)
 
 ---
+
+<img width="1919" height="721" alt="image" src="https://github.com/user-attachments/assets/c2c9d374-aca0-4375-b358-1ffd3cee4b5d" />
+
 
 ## 📌 Problem
 
@@ -100,34 +103,62 @@ dp[j] = max(
 
 # 💻 JavaScript Code
 
-```javascript
-function knapsack(W, val, wt) {
+### 2D Knapsack
+```java
+    public static int knapsack(int W, int[] val, int[] wt) {
+        int n = wt.length;
+        int[][] dp = new int[n + 1][W + 1];
 
-    // Initialize dp array
-    let dp = new Array(W + 1).fill(0);
+        // Build table dp[][] in bottom-up manner
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= W; j++) {
 
-    // Iterate over items
-    for (let i = 1; i <= wt.length; i++) {
+                // If there is no item or the knapsack's capacity is 0
+                if (i == 0 || j == 0)
+                    dp[i][j] = 0;
+                else {
+                    int pick = 0;
 
-        // Go backwards (important!)
-        for (let j = W; j >= wt[i - 1]; j--) {
+                    // Pick ith item if it does not exceed the capacity of knapsack
+                    if (wt[i - 1] <= j)
+                        pick = val[i - 1] + dp[i - 1][j - wt[i - 1]];
 
-            dp[j] = Math.max(
-                dp[j],
-                dp[j - wt[i - 1]] + val[i - 1]
-            );
+                    // Don't pick the ith item
+                    int notPick = dp[i - 1][j];
+
+                    dp[i][j] = Math.max(pick, notPick);
+                }
+            }
         }
+        return dp[n][W];
     }
+```
 
-    return dp[W];
+### 1D Optimization
+```java
+class Solution {
+
+    public int knapsack(int W, int[] val, int[] wt) {
+
+        int[] dp = new int[W + 1];
+
+        // Iterate over items (same as JS)
+        for (int i = 1; i <= wt.length; i++) {
+
+            // Go backwards (important!)
+            for (int j = W; j >= wt[i - 1]; j--) {
+
+                dp[j] = Math.max(
+                        dp[j],
+                        dp[j - wt[i - 1]] + val[i - 1]
+                );
+            }
+        }
+
+        return dp[W];
+    }
 }
 
-// Driver Code
-let val = [1, 2, 3];
-let wt = [4, 5, 1];
-let W = 4;
-
-console.log(knapsack(W, val, wt));
 ```
 
 ---
