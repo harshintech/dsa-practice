@@ -84,6 +84,32 @@ minimum effort so far
 # 💻 Code
 
 ```java
+// NOTE :
+//1. We Find All Path From start to destination 
+//2. Then in this Path we find max abs differnce
+//3. In This is all differnce we select minimum
+
+/*
+We need:
+minimum possible MAX edge
+
+⚠️ TWO WORDS HERE:
+MINIMUM   of   MAXIMUM
+
+This is the whole trick.
+
+
+
+
+Dry Run Example :
+1   2   2
+3   8   2
+5   3   5
+Path 1 : 1 -> 2 -> 2 -> 2 -> 5 , max = 5 - 2 = 3 effort 
+Path 2 : 1 -> 3 -> 8 -> 2 -> 5 , max = 8 - 2 = 6 effort
+Path 3 : 1 -> 3 -> 5 -> 3 -> 5 , max = 5 - 3 = 2 effort --> Answer Minimum from all
+*/
+
 class Solution {
 
     class Pair{
