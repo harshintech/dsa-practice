@@ -98,9 +98,6 @@ MINIMUM   of   MAXIMUM
 
 This is the whole trick.
 
-
-
-
 Dry Run Example :
 1   2   2
 3   8   2
