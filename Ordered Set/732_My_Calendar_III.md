@@ -160,7 +160,59 @@ Return:
 ```
 3
 ```
+Bookings:
 
+```
+[10,20], [15,25], [17,30]
+```
+
+---
+
+# 🟢 Timeline with +1 / -1
+
+```
+Time → 10    15    17    20    25    30
+        |     |     |     |     |     |
+
+Event 1:  10 ---------------- 20   (+1 at 10, -1 at 20)
+Event 2:        15 ---------------- 25   (+1 at 15, -1 at 25)
+Event 3:              17 ---------------- 30   (+1 at 17, -1 at 30)
+```
+
+---
+
+# 🟢 Line Sweep + Active Count
+
+We will show **+1 / -1 on timeline** and **active count at that point**:
+
+```
+Time → 10    15    17    20    25    30
+        |     |     |     |     |     |
+Change: +1    +1    +1    -1    -1    -1
+Active:  1     2     3     2     1     0
+```
+
+✅ Maximum active = 3
+
+---
+
+# 🟢 Graphical “Line + Event” view
+
+```
+Active Meetings
+3 |              ________
+2 |      _______|        |______
+1 |  ____|                  |____
+0 |_________________________________
+    10    15     17    20    25    30
++1s ↑      ↑      ↑
+-1s                         ↑      ↑      ↑
+```
+
+Legend:
+
+* `↑` shows where a meeting starts (+1) or ends (-1)
+* Horizontal line shows the duration of meeting
 ---
 
 # 🧩 Why TreeMap?
